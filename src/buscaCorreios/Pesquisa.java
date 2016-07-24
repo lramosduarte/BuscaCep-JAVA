@@ -44,7 +44,7 @@ public class Pesquisa {
     private int post(String cep) throws IOException {
         request.setDoOutput(true);
         parametros(cep);
-        return request.getResponseCode();;
+        return request.getResponseCode();
     }
 
 }
