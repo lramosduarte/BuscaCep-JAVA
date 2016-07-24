@@ -26,9 +26,26 @@ public class HtmlParser {
         Iterator<String> nomes = nomeTags(html).iterator();
         Iterator<String> valores = valoresTags(html).iterator();
         while(nomes.hasNext() && valores.hasNext()){
-            
+            extrairDados(nomes.next(), valores.next());
         }
         return dados;
+    }
+
+    private void extrairDados(String nome, String valor) {
+        switch (nome){
+            case "Logradouro: ":
+                dados.logradouro = valor;
+                break;
+            case "Bairro: ":
+                dados.bairro = valor;
+                break;
+            case "CEP: ":
+                dados.logradouro = valor;
+                break;
+            default:
+                dados.setLocalidade(valor);
+                break;
+        }
     }
 
     public List nomeTags(StringBuffer html){
