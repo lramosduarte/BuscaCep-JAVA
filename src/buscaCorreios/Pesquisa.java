@@ -1,8 +1,10 @@
 package buscaCorreios;
 
 import javax.net.ssl.HttpsURLConnection;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ProtocolException;
 import java.net.URL;
 
@@ -47,4 +49,17 @@ public class Pesquisa {
         return request.getResponseCode();
     }
 
+    private StringBuffer response() throws IOException {
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(request.getInputStream()));
+        String line;
+        StringBuffer response = new StringBuffer();
+        while ((line = reader.readLine()) != null){
+            response.append(line);
+        }
+        reader.close();
+        return response;
+    }
+
+    
 }
