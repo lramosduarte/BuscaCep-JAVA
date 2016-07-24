@@ -53,7 +53,7 @@ public class Pesquisa {
 
     private StringBuffer response() throws IOException {
         BufferedReader reader = new BufferedReader(
-                new InputStreamReader(request.getInputStream()));
+                new InputStreamReader(request.getInputStream(), "ISO-8859-1"));
         String line;
         StringBuffer response = new StringBuffer();
         while ((line = reader.readLine()) != null){
