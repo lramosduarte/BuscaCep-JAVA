@@ -1,10 +1,10 @@
 package buscaCorreios;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 
@@ -17,10 +17,11 @@ public class Pesquisa {
             "buscaCepConfirma.do";
 
     private URL resource = new URL(URL);;
-    private HttpsURLConnection request;
+    private HttpURLConnection request;
+    private int status;
 
     public Pesquisa() throws IOException {
-        request = (HttpsURLConnection) resource.openConnection();
+        request = (HttpURLConnection) resource.openConnection();
         setCabecalhoRequest("POST");
     }
 
@@ -66,7 +67,11 @@ public class Pesquisa {
         if (cep.isEmpty() || cep == null){
             return new StringBuffer("Digite um cep valido!");
         }
-        post(cep);
+        status = post(cep);
         return response();
+    }
+
+    public int getStatus() {
+        return status;
     }
 }
