@@ -40,7 +40,7 @@ public class HtmlParser {
                 dados.bairro = valor;
                 break;
             case "CEP: ":
-                dados.logradouro = valor;
+                dados.cep = Integer.parseInt(valor);
                 break;
             default:
                 dados.setLocalidade(valor);
