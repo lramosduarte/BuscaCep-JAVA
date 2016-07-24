@@ -13,7 +13,8 @@ import java.net.URL;
  */
 public class Pesquisa {
     private final String USER_AGENT = "Mozilla/5.0";
-    private final String URL = "http://m.correios.com.br/movel/buscaCepConfirma.do");
+    private final String URL = "http://m.correios.com.br/movel/" +
+            "buscaCepConfirma.do";
 
     private URL resource = new URL(URL);;
     private HttpsURLConnection request;
@@ -61,5 +62,11 @@ public class Pesquisa {
         return response;
     }
 
-    
+    public StringBuffer buscarCep(String cep) throws IOException {
+        if (cep.isEmpty() || cep == null){
+            return new StringBuffer("Digite um cep valido!");
+        }
+        post(cep);
+        return response();
+    }
 }
