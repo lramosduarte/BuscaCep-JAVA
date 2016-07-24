@@ -8,7 +8,7 @@ public class Dados {
     int cep;
     String cidade;
     String bairro;
-    String localidade;
+    String logradouro;
     String estado;
 
     public void setLocalidade(String logradouro){
