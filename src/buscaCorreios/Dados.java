@@ -11,7 +11,7 @@ public class Dados {
     String localidade;
     String estado;
 
-    public void setLogradouro(String logradouro){
+    public void setLocalidade(String logradouro){
         cidade = logradouro.split("/")[0];
         estado = logradouro.split("/")[1];
     }
