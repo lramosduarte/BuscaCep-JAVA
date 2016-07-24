@@ -15,7 +15,6 @@ public class Pesquisa {
 
     private URL resource = new URL(URL);;
     private HttpsURLConnection request;
-    public int status;
 
     public Pesquisa() throws IOException {
         request = (HttpsURLConnection) resource.openConnection();
@@ -42,14 +41,10 @@ public class Pesquisa {
         stream.close();
     }
 
-    private StringBuffer post(String cep) throws IOException {
+    private int post(String cep) throws IOException {
         request.setDoOutput(true);
         parametros(cep);
-        status = request.getResponseCode();
-
+        return request.getResponseCode();;
     }
 
-    public int buscarCep(String){
-
-    }
 }
