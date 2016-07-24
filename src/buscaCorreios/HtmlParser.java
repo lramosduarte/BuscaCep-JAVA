@@ -34,16 +34,16 @@ public class HtmlParser {
     private void extrairDados(String nome, String valor) {
         switch (nome){
             case "Logradouro: ":
-                dados.logradouro = valor;
+                dados.logradouro = valor.trim();
                 break;
             case "Bairro: ":
-                dados.bairro = valor;
+                dados.bairro = valor.trim();
                 break;
             case "CEP: ":
                 dados.cep = Integer.parseInt(valor);
                 break;
             default:
-                dados.setLocalidade(valor);
+                dados.setLocalidade(valor.trim());
                 break;
         }
     }

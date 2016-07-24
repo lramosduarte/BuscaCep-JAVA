@@ -12,7 +12,7 @@ public class Dados {
     String estado;
 
     public void setLocalidade(String logradouro){
-        cidade = logradouro.split("/")[0];
-        estado = logradouro.split("/")[1];
+        cidade = logradouro.split("/")[0].trim();
+        estado = logradouro.split("/")[1].trim();
     }
 }
