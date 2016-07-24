@@ -63,12 +63,14 @@ public class Pesquisa {
         return response;
     }
 
-    public StringBuffer buscarCep(String cep) throws IOException {
+    public Dados buscarCep(String cep) throws IOException {
         if (cep.isEmpty() || cep == null){
-            return new StringBuffer("Digite um cep valido!");
+            return null;
         }
         status = post(cep);
-        return response();
+        HtmlParser parser = new HtmlParser();
+        Dados dados = parser.parser(response());
+        return dados;
     }
 
     public int getStatus() {

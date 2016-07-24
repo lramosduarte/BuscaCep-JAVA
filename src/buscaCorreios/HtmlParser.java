@@ -48,7 +48,7 @@ public class HtmlParser {
         }
     }
 
-    public List nomeTags(StringBuffer html){
+    private List nomeTags(StringBuffer html){
         List<String> nomes = new ArrayList<>();
         Matcher regex = TAG_NOMES.matcher(html);
         while (regex.find())
@@ -56,7 +56,7 @@ public class HtmlParser {
         return nomes;
     }
 
-    public List valoresTags(StringBuffer html){
+    private List valoresTags(StringBuffer html){
         List<String> valores = new ArrayList<>();
         Matcher regex = TAG.matcher(html);
         while (regex.find())
