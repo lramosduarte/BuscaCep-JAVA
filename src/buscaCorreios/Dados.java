@@ -6,10 +6,10 @@ package buscaCorreios;
 public class Dados {
 
     int cep;
-    String cidade;
-    String bairro;
-    String logradouro;
-    String estado;
+    public String cidade;
+    public String bairro;
+    public String logradouro;
+    public String estado;
 
     public void setLocalidade(String logradouro){
         cidade = logradouro.split("/")[0].trim();
