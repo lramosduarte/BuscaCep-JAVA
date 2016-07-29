@@ -7,6 +7,7 @@ Requerimentos:
 - Gradle
 
 Para realizar a build no gralde:
+
 1. gradle tasks
 2. gradle assemble
 3. gradle build
