@@ -63,14 +63,19 @@ public class Pesquisa {
         return response;
     }
 
-    public Dados buscarCep(String cep) throws IOException {
-        if (cep.isEmpty() || cep == null){
+    public Dados buscarCep(String cep){
+        try{
+            if(cep == null || cep.isEmpty()){
+                return null;
+            }
+            status = post(cep);
+            HtmlParser parser = new HtmlParser();
+            Dados dados = parser.parser(response());
+            return dados;
+        }catch (IOException ex){
             return null;
         }
-        status = post(cep);
-        HtmlParser parser = new HtmlParser();
-        Dados dados = parser.parser(response());
-        return dados;
+
     }
 
     public int getStatus() {
