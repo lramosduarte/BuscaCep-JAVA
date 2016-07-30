@@ -18,7 +18,6 @@ public class Pesquisa {
 
     private URL resource = new URL(URL);;
     private HttpURLConnection request;
-    private int status;
 
     public Pesquisa() throws IOException {
         request = (HttpURLConnection) resource.openConnection();
@@ -45,10 +44,10 @@ public class Pesquisa {
         stream.close();
     }
 
-    private int post(String cep) throws IOException {
+    private void sendRequest(String cep) throws IOException {
         request.setDoOutput(true);
         parametros(cep);
-        return request.getResponseCode();
+        request.getResponseCode();
     }
 
     private StringBuffer response() throws IOException {
@@ -68,7 +67,7 @@ public class Pesquisa {
             if(cep == null || cep.isEmpty()){
                 return null;
             }
-            status = post(cep);
+            this.sendRequest(cep);
             HtmlParser parser = new HtmlParser();
             Dados dados = parser.parser(response());
             return dados;
@@ -76,9 +75,5 @@ public class Pesquisa {
             return null;
         }
 
-    }
-
-    public int getStatus() {
-        return status;
     }
 }

@@ -50,12 +50,4 @@ public class TestPesquisa {
         assertNull(pesquisa.buscarCep(null));
         assertNull(pesquisa.buscarCep(""));
     }
-
-    @Test
-    public void testStatusCode() throws IOException {
-        pesquisa.buscarCep("39400500");
-        assertEquals(pesquisa.getStatus(), 200);
-    }
-
-
 }
