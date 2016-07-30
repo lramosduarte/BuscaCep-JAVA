@@ -1,16 +1,20 @@
+[![Build Status](https://travis-ci.org/lramosduarte/BuscaCep-JAVA.svg?branch=master)](https://travis-ci.org/lramosduarte/BuscaCep-JAVA)
+
 # BuscaCep-JAVA
-Procura os dados de um cep diretamente no site dos correios.
+Procura os dados de um cep diretamente no site dos correios
+
 **Utilizado apenas standard lib do JAVA 8.**
 
 Requerimentos:
 - Java 8
 - Gradle
 
-Para realizar a build no gralde:
+Para realizar a build manualmente:
 
+1. Instale o gradle
 1. gradle tasks
-2. gradle assemble
-3. gradle build
+1. gradle assemble
+1. gradle build
 
 Exemplo de uso:
 
