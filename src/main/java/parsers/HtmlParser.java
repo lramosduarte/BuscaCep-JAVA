@@ -1,16 +1,18 @@
-package buscaCorreios;
+package parsers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dados.Dados;
+
+
 /**
  * Created by lramosduarte on 24/07/16.
  */
-public class HtmlParser {
+public class HtmlParser implements Parser<StringBuffer> {
     private final static Pattern TAG_NOMES = Pattern.compile("<span " +
             "class=\"resposta\">(.+?)</span>");
     private final static Pattern TAG = Pattern.compile("<span " +
@@ -22,28 +24,29 @@ public class HtmlParser {
         this.dados = new Dados();
     }
 
+    @Override
     public Dados parser(StringBuffer html){
         Iterator<String> nomes = nomeTags(html).iterator();
         Iterator<String> valores = valoresTags(html).iterator();
         while(nomes.hasNext() && valores.hasNext()){
             extrairDados(nomes.next(), valores.next());
         }
-        return dados;
+        return this.dados;
     }
 
     private void extrairDados(String nome, String valor) {
         switch (nome){
             case "Logradouro: ":
-                dados.logradouro = valor.trim();
+                this.dados.logradouro = valor.trim();
                 break;
             case "Bairro: ":
-                dados.bairro = valor.trim();
+                this.dados.bairro = valor.trim();
                 break;
             case "CEP: ":
-                dados.cep = Integer.parseInt(valor);
+                this.dados.cep = Integer.parseInt(valor);
                 break;
             default:
-                dados.setLocalidade(valor.trim());
+                this.dados.setLocalidade(valor.trim());
                 break;
         }
     }
