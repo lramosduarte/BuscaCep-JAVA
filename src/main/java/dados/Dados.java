@@ -1,11 +1,12 @@
-package buscaCorreios;
+package dados;
+
 
 /**
  * Created by lramosduarte on 24/07/16.
  */
 public class Dados {
 
-    int cep;
+    public int cep;
     public String cidade;
     public String bairro;
     public String logradouro;

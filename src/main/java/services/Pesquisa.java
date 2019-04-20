@@ -1,4 +1,7 @@
-package buscaCorreios;
+package services;
+
+import dados.Dados;
+import parsers.HtmlParser;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -38,7 +41,7 @@ public class Pesquisa {
     private void parametros(String cep) throws IOException {
         String parametrosUrl = "cepEntrada=" + cep + "&metodo=buscarCep";
         DataOutputStream stream = new DataOutputStream(request
-                .getOutputStream());
+            .getOutputStream());
         stream.writeBytes(parametrosUrl);
         stream.flush();
         stream.close();
@@ -62,18 +65,11 @@ public class Pesquisa {
         return response;
     }
 
-    public Dados buscarCep(String cep){
-        try{
-            if(cep == null || cep.isEmpty()){
-                return null;
-            }
-            this.sendRequest(cep);
-            HtmlParser parser = new HtmlParser();
-            Dados dados = parser.parser(response());
-            return dados;
-        }catch (IOException ex){
+    public Dados buscarCep(String cep) throws IOException {
+        if(cep == null || cep.isEmpty()){
             return null;
         }
-
+        this.sendRequest(cep);
+        return  new HtmlParser().parser(response());
     }
 }

@@ -1,13 +1,16 @@
-package test.java;
+import java.io.IOException;
 
-import buscaCorreios.Dados;
-import buscaCorreios.Pesquisa;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 
-import java.io.IOException;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+import dados.Dados;
+import services.Pesquisa;
 
 
 /**
