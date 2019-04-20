@@ -1,69 +1,44 @@
 package parsers;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dados.Dados;
+import dados.Endereco;
 
 
-/**
- * Created by lramosduarte on 24/07/16.
- */
 public class HtmlParser implements Parser<StringBuffer> {
-    private final static Pattern TAG_NOMES = Pattern.compile("<span " +
-            "class=\"resposta\">(.+?)</span>");
-    private final static Pattern TAG = Pattern.compile("<span " +
-            "class=\"respostadestaque\">(.+?)</span>");
-
-    private Dados dados;
-
-    public HtmlParser() {
-        this.dados = new Dados();
-    }
+    private final static Pattern TABELA = Pattern.compile(
+        "<table class=\"tmptabela\">(.+)<\\/table>");
+    private final static Pattern DADOS = Pattern.compile(
+        "<td width=.+>(?<logradouro>[a-zA-Z].+)<\\/td>" +
+        "<td>(?<bairro>[a-zA-Z].+)<\\/td>" +
+        "<td>(?<cidadeEstado>[a-zA-Z].+)<\\/td>" +
+        "<td width=.+>(?<cep>[0-9]{5}-[0-9]{3})<\\/td>");
 
     @Override
-    public Dados parser(StringBuffer html){
-        Iterator<String> nomes = nomeTags(html).iterator();
-        Iterator<String> valores = valoresTags(html).iterator();
-        while(nomes.hasNext() && valores.hasNext()){
-            extrairDados(nomes.next(), valores.next());
+    public Endereco parser(StringBuffer html){
+        Matcher regexTabela = this.TABELA.matcher(html);
+        if(!regexTabela.find()) {
+            return null;
         }
-        return this.dados;
+        Matcher regexDados = this.DADOS.matcher(regexTabela.group(1));
+        regexDados.find();
+        return extrairDados(regexDados);
     }
 
-    private void extrairDados(String nome, String valor) {
-        switch (nome){
-            case "Logradouro: ":
-                this.dados.logradouro = valor.trim();
-                break;
-            case "Bairro: ":
-                this.dados.bairro = valor.trim();
-                break;
-            case "CEP: ":
-                this.dados.cep = Integer.parseInt(valor);
-                break;
-            default:
-                this.dados.setLocalidade(valor.trim());
-                break;
-        }
+    private Endereco extrairDados(Matcher result) {
+        Endereco endereco = new Endereco();
+        endereco.logradouro = this.limpaDado(result.group("logradouro"));
+        endereco.bairro = this.limpaDado(result.group("bairro"));
+        endereco.cep = this.limpaDado(result.group("cep"));
+        String[] cidadeEstado = result.group("cidadeEstado").split("/");
+        endereco.cidade = this.limpaDado(cidadeEstado[0]);
+        endereco.estado = this.limpaDado(cidadeEstado[1]);
+        return endereco;
     }
 
-    private List nomeTags(StringBuffer html){
-        List<String> nomes = new ArrayList<>();
-        Matcher regex = TAG_NOMES.matcher(html);
-        while (regex.find())
-            nomes.add(regex.group(1));
-        return nomes;
+    private String limpaDado(String dado) {
+        return dado.replaceAll("&nbsp;", "").trim();
     }
 
-    private List valoresTags(StringBuffer html){
-        List<String> valores = new ArrayList<>();
-        Matcher regex = TAG.matcher(html);
-        while (regex.find())
-            valores.add(regex.group(1));
-        return valores;
-    }
- }
+}

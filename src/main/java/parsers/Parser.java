@@ -1,9 +1,10 @@
 package parsers;
 
-import dados.Dados;
+import dados.Endereco;
+
 
 public interface Parser<STRINGBUFFER> {
 
-    Dados parser(STRINGBUFFER buffer);
+    Endereco parser(STRINGBUFFER buffer);
 
 }
