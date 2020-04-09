@@ -46,3 +46,21 @@ import services.Pesquisa;
         endereco.Endereco resultado = pesquisarCep.buscarCep("39400500");
     }
 ```
+
+## Instação a partir do maven:
+```xml
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.lramosduarte</groupId>
+            <artifactId>BuscaCep-JAVA</artifactId>
+            <version>v1.1</version>
+        </dependency>
+    </dependencies>
+```
